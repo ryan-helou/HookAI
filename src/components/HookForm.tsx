@@ -21,44 +21,53 @@ const HookForm = ({ onGenerate, isLoading }: HookFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-      <h2 className="text-2xl font-bold text-gray-900 mb-2">Create Hooks</h2>
-      <p className="text-gray-600 text-sm mb-8">Tell us about your video</p>
+    <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-200">
+      {/* Header */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          Generate Hooks
+        </h2>
+        <p className="text-gray-600 text-base font-medium">
+          Describe your video and pick a tone
+        </p>
+      </div>
 
       {/* Description field */}
-      <div className="mb-6">
+      <div className="mb-8">
         <div className="flex items-center justify-between mb-3">
           <label className="block text-gray-900 text-sm font-semibold">
             What's your video about?
           </label>
-          <span className="text-gray-500 text-xs">{description.length}/500</span>
+          <span className={`text-xs font-medium ${description.length > 450 ? 'text-orange-600' : 'text-gray-500'}`}>
+            {description.length}/500
+          </span>
         </div>
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value.slice(0, 500))}
-          placeholder="E.g., A tutorial on making sourdough bread, A fitness transformation story..."
-          className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:bg-white transition-all resize-none text-base"
-          rows={4}
+          placeholder="E.g., A tutorial on making sourdough bread, a fitness transformation story, or a productivity hack..."
+          className="w-full px-4 py-4 bg-white border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all resize-none text-base font-medium"
+          rows={5}
           disabled={isLoading}
         />
       </div>
 
       {/* Tone selector */}
       <div className="mb-8">
-        <label className="block text-gray-900 text-sm font-semibold mb-3">
-          Choose your tone
+        <label className="block text-gray-900 text-sm font-semibold mb-4">
+          Select your tone
         </label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-3">
           {TONES.map((t) => (
             <button
               key={t}
               type="button"
               onClick={() => setTone(t)}
               disabled={isLoading}
-              className={`px-4 py-3 rounded-lg font-medium text-sm transition-all ${
+              className={`px-4 py-3 rounded-xl font-semibold text-sm transition-all duration-200 border-2 ${
                 tone === t
-                  ? 'bg-blue-600 text-white border border-blue-700'
-                  : 'bg-gray-100 text-gray-900 border border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-transparent shadow-lg hover:shadow-xl'
+                  : 'bg-white text-gray-900 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50'
               } disabled:opacity-50 disabled:cursor-not-allowed`}
             >
               {t.charAt(0).toUpperCase() + t.slice(1)}
@@ -71,15 +80,15 @@ const HookForm = ({ onGenerate, isLoading }: HookFormProps) => {
       <button
         type="submit"
         disabled={isLoading || !description.trim()}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:shadow-md"
+        className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl text-lg"
       >
         {isLoading ? (
-          <span className="flex items-center justify-center gap-2">
-            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-            Generating...
+          <span className="flex items-center justify-center gap-3">
+            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+            <span>Generating amazing hooks...</span>
           </span>
         ) : (
-          '✨ Generate Hooks'
+          <span>✨ Generate Hooks</span>
         )}
       </button>
     </form>
