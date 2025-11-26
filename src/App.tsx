@@ -29,18 +29,22 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-pink-600 p-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-white mb-4">🎬 HookAI</h1>
-          <p className="text-xl text-white/80">Generate engaging viral hooks for your videos</p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-purple-900 p-4 md:p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16 animate-fade-in">
+          <h1 className="text-6xl md:text-7xl font-black text-white mb-4 tracking-tight">
+            🎬 HookAI
+          </h1>
+          <p className="text-xl md:text-2xl text-purple-100 font-light">
+            Generate viral hooks for your videos instantly
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+          <div className="lg:col-span-1 animate-fade-in">
             <HookForm onGenerate={handleGenerateHooks} isLoading={isLoading} />
           </div>
-          <div>
+          <div className="lg:col-span-2 animate-fade-in">
             <HooksDisplay hooks={hooks} isLoading={isLoading} onRegenerate={handleRegenerate} />
           </div>
         </div>

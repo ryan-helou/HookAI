@@ -21,35 +21,37 @@ const HookForm = ({ onGenerate, isLoading }: HookFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-md rounded-lg p-8">
-      <h2 className="text-2xl font-bold text-white mb-6">Create Your Hooks</h2>
+    <form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8 shadow-2xl hover:bg-white/10 transition-all duration-300">
+      <h2 className="text-2xl font-bold text-white mb-2">Create Your Hooks</h2>
+      <p className="text-purple-100 text-sm mb-8">Describe your video and choose a tone</p>
 
-      <div className="mb-6">
-        <label className="block text-white text-sm font-medium mb-2">
-          Video Description
+      <div className="mb-8">
+        <label className="block text-white text-sm font-semibold mb-3">
+          📝 Video Description
         </label>
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Describe what your video is about..."
-          className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/50 focus:outline-none focus:border-white/60 transition"
-          rows={5}
+          placeholder="Describe what your video is about... (e.g., 'A tutorial on how to make the perfect pizza')"
+          className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-white/50 focus:bg-white/15 transition resize-none"
+          rows={4}
           disabled={isLoading}
         />
+        <p className="text-white/50 text-xs mt-2">{description.length}/500</p>
       </div>
 
-      <div className="mb-6">
-        <label className="block text-white text-sm font-medium mb-2">
-          Tone
+      <div className="mb-8">
+        <label className="block text-white text-sm font-semibold mb-3">
+          🎭 Tone
         </label>
         <select
           value={tone}
           onChange={(e) => setTone(e.target.value as Tone)}
-          className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:border-white/60 transition"
+          className="w-full px-5 py-4 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:border-white/50 focus:bg-white/15 transition cursor-pointer"
           disabled={isLoading}
         >
           {TONES.map((t) => (
-            <option key={t} value={t} className="bg-gray-800">
+            <option key={t} value={t} className="bg-gray-900">
               {t.charAt(0).toUpperCase() + t.slice(1)}
             </option>
           ))}
@@ -59,9 +61,9 @@ const HookForm = ({ onGenerate, isLoading }: HookFormProps) => {
       <button
         type="submit"
         disabled={isLoading || !description.trim()}
-        className="w-full bg-white text-purple-600 font-bold py-3 rounded-lg hover:bg-gray-100 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
+        className="w-full bg-gradient-to-r from-blue-400 to-cyan-400 text-gray-900 font-bold py-4 rounded-xl hover:shadow-lg hover:from-blue-300 hover:to-cyan-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-lg"
       >
-        {isLoading ? 'Generating...' : 'Generate Hooks'}
+        {isLoading ? '⚡ Generating...' : '🚀 Generate Hooks'}
       </button>
     </form>
   );
