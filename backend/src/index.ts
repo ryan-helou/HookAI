@@ -3,6 +3,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
 import authRoutes from './routes/auth';
+import chatRoutes from './routes/chat';
+import hooksRoutes from './routes/hooks';
+import { loadGoodHooks } from './utils/hooksLoader';
 
 // Load environment variables
 dotenv.config();
@@ -30,9 +33,9 @@ app.get('/health', (_req, res) => {
 
 // Routes
 app.use('/api/auth', authRoutes);
-// TODO: Add more routes
-// app.use('/api/chat', chatRoutes);
-// app.use('/api/hooks', hooksRoutes);
+app.use('/api/chat', chatRoutes);
+app.use('/api/hooks', hooksRoutes);
+// TODO: Add subscription and stripe routes
 // app.use('/api/subscription', subscriptionRoutes);
 // app.use('/api/stripe', stripeRoutes);
 
@@ -55,6 +58,10 @@ const startServer = async () => {
     // Test Prisma connection
     await prisma.$connect();
     console.log('✓ Database connected');
+
+    // Load good hooks for ranking
+    await loadGoodHooks();
+    console.log('✓ Good hooks loaded');
 
     app.listen(PORT, () => {
       console.log(`✓ Server running on http://localhost:${PORT}`);
