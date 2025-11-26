@@ -1,0 +1,139 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  password          String
+  name              String
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  // Stripe integration
+  subscription      Subscription?
+  stripeCustomerId  String?   @unique
+
+  // Relations
+  conversations     Conversation[]
+  hooks             Hook[]
+  usageRecords      UsageRecord[]
+
+  @@index([email])
+}
+
+// Subscription model - tracks user's plan and usage
+model Subscription {
+  id                String    @id @default(cuid())
+  userId            String    @unique
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  planId            String    // "free", "basic", "pro"
+  stripeSubId       String?   @unique
+  status            String    // "active", "inactive", "canceled"
+
+  currentUsage      Int       @default(0)
+  monthlyLimit      Int       // 3, 150, 1000 based on plan
+  renewalDate       DateTime
+
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([status])
+}
+
+// Conversation model - tracks chat conversations
+model Conversation {
+  id                String    @id @default(cuid())
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  topic             String    @db.Text
+  messages          Message[]
+  hooks             Hook[]
+
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+// Message model - individual messages in conversations
+model Message {
+  id                String    @id @default(cuid())
+  conversationId    String
+  conversation      Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  role              String    // "user" or "assistant"
+  content           String    @db.Text
+
+  createdAt         DateTime  @default(now())
+
+  @@index([conversationId])
+  @@index([createdAt])
+}
+
+// Hook model - generated hooks with scores
+model Hook {
+  id                String    @id @default(cuid())
+  conversationId    String
+  conversation      Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  text              String    @db.Text
+  tone              String    // "funny", "dramatic", "inspirational", etc.
+  score             Int       // 1-100
+  rank              Int       // 1-5
+
+  // For analytics
+  impressions       Int       @default(0)
+  copiedCount       Int       @default(0)
+  userFeedback      String?   // "good", "bad", "neutral"
+
+  createdAt         DateTime  @default(now())
+
+  @@index([conversationId])
+  @@index([userId])
+  @@index([score])
+}
+
+// UsageRecord model - track individual hook generations
+model UsageRecord {
+  id                String    @id @default(cuid())
+  userId            String
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  action            String    // "hook_generated", "hook_regenerated"
+  tokensUsed        Int
+
+  createdAt         DateTime  @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+}
+
+// StripeEvent model - webhook event tracking
+model StripeEvent {
+  id                String    @id @default(cuid())
+  stripeEventId     String    @unique
+  type              String    // "payment_intent.succeeded", etc.
+  data              Json      // Full event payload
+  processed         Boolean   @default(false)
+
+  createdAt         DateTime  @default(now())
+
+  @@index([type])
+  @@index([processed])
+}
