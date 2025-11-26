@@ -32,32 +32,32 @@ const HookCard = ({ hook }: HookCardProps) => {
   const borderColor = getScoreBorderColor(hook.score);
 
   return (
-    <div className={`${bgColor} rounded-2xl p-6 border-2 ${borderColor} hover:shadow-lg transition-all duration-300 hover:-translate-y-1`}>
+    <div className={`${bgColor} rounded-xl p-4 border-2 ${borderColor} hover:shadow-lg transition-all duration-300 hover:-translate-y-1`}>
       {/* Score and badge header */}
-      <div className="flex items-start justify-between gap-4 mb-4">
-        <div className="flex-1">
-          <div className={`text-4xl font-black ${scoreColor} mb-2`}>
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <div className="flex-1 min-w-0">
+          <div className={`text-3xl font-black ${scoreColor}`}>
             {hook.score}
           </div>
-          <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold ${badge.color}`}>
+          <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold ${badge.color} mt-1`}>
             {badge.icon} {badge.label}
           </span>
         </div>
       </div>
 
       {/* Hook text */}
-      <p className="text-gray-900 leading-relaxed text-base font-semibold mb-6">
+      <p className="text-gray-900 leading-snug text-sm font-semibold mb-3 line-clamp-2">
         "{hook.hook}"
       </p>
 
       {/* Copy button */}
       <button
         onClick={handleCopy}
-        className={`w-full px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white text-sm font-bold rounded-xl transition-all duration-200 shadow-md hover:shadow-lg ${
+        className={`w-full px-3 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white text-xs font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg ${
           copied ? 'ring-2 ring-emerald-400' : ''
         }`}
       >
-        {copied ? '✓ Copied to clipboard!' : '📋 Copy Hook'}
+        {copied ? '✓ Copied!' : '📋 Copy'}
       </button>
     </div>
   );
