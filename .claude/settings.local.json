@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(cat:*)",
+      "Bash(tree:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(npm exec:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nSetup HookAI project infrastructure: frontend and backend foundation\n\n- Install frontend dependencies: React Router, Axios, Zustand, TailwindCSS, Stripe.js, React Query\n- Configure TailwindCSS with custom branding colors\n- Create backend directory structure with Express + TypeScript\n- Setup Prisma database schema with all models (User, Subscription, Conversation, Message, Hook, UsageRecord, StripeEvent)\n- Implement JWT authentication system (backend service + controller + middleware)\n- Create auth routes (signup, login, logout, getMe, change-password)\n- Add auth types and utilities (JWT token generation, validators, constants)\n- Create frontend auth service with localStorage token management\n- Setup AuthContext for global auth state management\n- Add frontend types for auth, hooks, and chat\n- Create API client service with request/response interceptors\n- Add utility functions for score color mapping and constants\n- Initialize .gitignore for project\n\n🤖 Generated with Claude Code\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
