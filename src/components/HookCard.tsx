@@ -20,52 +20,39 @@ const HookCard = ({ hook }: HookCardProps) => {
   };
 
   const getScoreBadge = (score: number) => {
-    if (score >= 80) return { label: '🔥 Viral', color: 'text-pink-400' };
-    if (score >= 70) return { label: '⚡ Hot', color: 'text-orange-400' };
-    if (score >= 50) return { label: '⭐ Good', color: 'text-blue-400' };
-    return { label: '💡 Decent', color: 'text-gray-400' };
+    if (score >= 80) return { label: '🔥 Viral', color: 'bg-pink-100 text-pink-700' };
+    if (score >= 70) return { label: '⚡ Hot', color: 'bg-orange-100 text-orange-700' };
+    if (score >= 50) return { label: '⭐ Good', color: 'bg-blue-100 text-blue-700' };
+    return { label: '💡 Decent', color: 'bg-gray-100 text-gray-700' };
   };
 
   const badge = getScoreBadge(hook.score);
+  const scoreColor = getScoreColor(hook.score);
 
   return (
-    <div className="group relative overflow-hidden rounded-lg transition-all duration-300 hover:scale-105">
-      {/* Gradient border */}
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-600/0 via-purple-600/20 to-blue-600/0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-      {/* Card background */}
-      <div className="relative bg-gray-900/40 backdrop-blur-md border border-gray-700/30 rounded-lg p-5 transition-all duration-300 hover:bg-gray-900/60 hover:border-gray-600/50">
-        {/* Score indicator - top right */}
-        <div className="absolute top-4 right-4 flex flex-col items-end gap-1">
-          <div className={`text-2xl font-bold ${getScoreColor(hook.score)}`}>
-            {hook.score}
-          </div>
-          <div className={`text-xs font-semibold ${badge.color}`}>
-            {badge.label}
-          </div>
-        </div>
-
-        {/* Hook text */}
-        <p className="text-white leading-relaxed text-base pr-24 mb-4">
+    <div className="bg-white rounded-xl p-5 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-200">
+      {/* Header with score */}
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <p className="text-gray-900 leading-relaxed text-base flex-1">
           "{hook.hook}"
         </p>
+        <div className="flex-shrink-0 text-right">
+          <div className={`text-2xl font-bold ${scoreColor}`}>
+            {hook.score}
+          </div>
+        </div>
+      </div>
 
-        {/* Copy button */}
+      {/* Badge and copy button */}
+      <div className="flex items-center justify-between gap-2">
+        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${badge.color}`}>
+          {badge.label}
+        </span>
         <button
           onClick={handleCopy}
-          className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600/40 to-blue-600/40 hover:from-purple-600/60 hover:to-blue-600/60 border border-purple-500/30 rounded-lg text-sm text-white font-semibold transition-all duration-200"
+          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg transition-all duration-200"
         >
-          {copied ? (
-            <>
-              <span>✓</span>
-              <span>Copied!</span>
-            </>
-          ) : (
-            <>
-              <span>📋</span>
-              <span>Copy</span>
-            </>
-          )}
+          {copied ? '✓ Copied!' : '📋 Copy'}
         </button>
       </div>
     </div>
