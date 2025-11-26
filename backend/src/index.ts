@@ -5,6 +5,7 @@ import { PrismaClient } from '@prisma/client';
 import authRoutes from './routes/auth';
 import chatRoutes from './routes/chat';
 import hooksRoutes from './routes/hooks';
+import stripeRoutes from './routes/stripe';
 import { loadGoodHooks } from './utils/hooksLoader';
 
 // Load environment variables
@@ -35,9 +36,7 @@ app.get('/health', (_req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/hooks', hooksRoutes);
-// TODO: Add subscription and stripe routes
-// app.use('/api/subscription', subscriptionRoutes);
-// app.use('/api/stripe', stripeRoutes);
+app.use('/api/stripe', stripeRoutes);
 
 // Error handling middleware
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
