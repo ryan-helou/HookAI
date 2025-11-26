@@ -1,5 +1,6 @@
-import { Tone } from '../types/hooks';
+import type { Tone } from '../types/hooks';
 
+export type { Tone };
 export const TONES: Tone[] = ['funny', 'dramatic', 'inspirational', 'urgent', 'casual', 'professional'];
 
 export const TONE_DESCRIPTIONS: Record<Tone, string> = {
