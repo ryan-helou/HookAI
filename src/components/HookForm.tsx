@@ -7,16 +7,14 @@ interface HookFormProps {
   isLoading: boolean;
 }
 
-const TONES: Tone[] = ['funny', 'dramatic', 'inspirational', 'urgent', 'casual', 'professional'];
-
 const HookForm = ({ onGenerate, isLoading }: HookFormProps) => {
   const [description, setDescription] = useState('');
-  const [tone, setTone] = useState<Tone>('funny');
+  const DEFAULT_TONE: Tone = 'urgent';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (description.trim()) {
-      await onGenerate(description, tone);
+      await onGenerate(description, DEFAULT_TONE);
     }
   };
 
@@ -28,7 +26,7 @@ const HookForm = ({ onGenerate, isLoading }: HookFormProps) => {
           Generate Hooks
         </h2>
         <p className="text-gray-600 text-base font-medium">
-          Describe your video and pick a tone
+          Describe your video and get 5 killer hooks
         </p>
       </div>
 
@@ -50,30 +48,6 @@ const HookForm = ({ onGenerate, isLoading }: HookFormProps) => {
           rows={5}
           disabled={isLoading}
         />
-      </div>
-
-      {/* Tone selector */}
-      <div className="mb-8">
-        <label className="block text-gray-900 text-sm font-semibold mb-4">
-          Select your tone
-        </label>
-        <div className="grid grid-cols-2 gap-3">
-          {TONES.map((t) => (
-            <button
-              key={t}
-              type="button"
-              onClick={() => setTone(t)}
-              disabled={isLoading}
-              className={`px-4 py-3 rounded-xl font-semibold text-sm transition-all duration-200 border-2 ${
-                tone === t
-                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white border-transparent shadow-lg hover:shadow-xl'
-                  : 'bg-white text-gray-900 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50'
-              } disabled:opacity-50 disabled:cursor-not-allowed`}
-            >
-              {t.charAt(0).toUpperCase() + t.slice(1)}
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* Submit button */}

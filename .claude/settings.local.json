@@ -14,7 +14,8 @@
       "Bash(git commit -m \"$(cat <<''EOF''\nAdd complete frontend UI with routing and components\n\n- Create AuthPage with login/signup forms and playful design\n- Build ChatInterface with tone selector and message display\n- Create HooksDisplay component showing top 5 ranked hooks\n- Implement HookCard with copy-to-clipboard functionality\n- Add color-coded score display (Red/Yellow/Green)\n- Build Navbar with usage tracking and user menu\n- Create ChatPage tying chat and hooks together\n- Implement route protection with ProtectedRoute component\n- Setup React Router with public and protected routes\n- Add usage tracking service for frontend\n- Create comprehensive type definitions\n- Update App.tsx with full routing structure\n- Configure Tailwind styling with gradient colors\n- Add loading states and error handling\n\nUI Features:\n- Playful gradient colors (purple → pink)\n- Responsive design for mobile and desktop\n- Real-time message updates with auto-scroll\n- Copy-to-clipboard with visual feedback\n- Tone selection with 6 options\n- Usage bar with 80% warning\n- Smooth animations and transitions\n- Loading spinners and skeleton states\n\n🤖 Generated with Claude Code\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
       "Bash(git commit:*)",
       "Bash(npm run build:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npm run dev:*)"
     ],
     "deny": [],
     "ask": []
