@@ -12,13 +12,31 @@ dist
 dist-ssr
 *.local
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
+# IDE
+.vscode
 .idea
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
+
+# Build
+build/
+out/
+
+# Backend specific
+backend/node_modules
+backend/dist
+backend/.env
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
