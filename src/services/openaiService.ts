@@ -470,11 +470,12 @@ ${templateSample.map((h, i) => `${i + 1}. "${h}"`).join('\n')}
 Your job:
 1. Select the BEST 3 hook templates from this list that would work PERFECTLY for this video topic
 2. FILL IN ALL THE BRACKETS with specific, relevant details based on "${description}"
+3. SHOW YOUR WORK by making what you filled in BOLD and putting the bracket name in parentheses
 
-Example: If the video is about "learning to build a paper airplane", and you select the template "Alright I'm gonna teach you exactly how to [outcome] in one video." - you would fill it in as: "Alright I'm gonna teach you exactly how to build a paper airplane in one video."
+Example: If the video is about "learning to build a paper airplane", and you select the template "Alright I'm gonna teach you exactly how to [outcome] in one video." - you would fill it in as: "Alright I'm gonna teach you exactly how to **build a paper airplane** (outcome) in one video."
 
-Return ONLY a JSON array with 3 objects containing the FILLED-IN "hook" text and a "relevanceScore" (1-100):
-[{"hook": "Alright I'm gonna teach you exactly how to build a paper airplane in one video", "relevanceScore": 85}, ...]`,
+Return ONLY a JSON array with 3 objects containing the hook with bold substitutions AND the plain text version for use:
+[{"hook": "Alright I'm gonna teach you exactly how to **build a paper airplane** (outcome) in one video", "hookPlain": "Alright I'm gonna teach you exactly how to build a paper airplane in one video", "relevanceScore": 85}, ...]`,
         },
       ],
       temperature: 0.7,
@@ -486,11 +487,12 @@ Return ONLY a JSON array with 3 objects containing the FILLED-IN "hook" text and
     const selectionMatch = selectionContent.match(/\[[\s\S]*\]/);
     if (!selectionMatch) throw new Error('Could not parse selected templates');
 
-    const selectedTemplates = JSON.parse(selectionMatch[0]) as Array<{ hook: string; relevanceScore: number }>;
+    const selectedTemplates = JSON.parse(selectionMatch[0]) as Array<{ hook: string; hookPlain: string; relevanceScore: number }>;
 
     // Convert to Hook format with template metadata
+    // Use hookPlain (clean version) for display, store full hook with markdown for reference
     return selectedTemplates.map((t) => ({
-      hook: t.hook,
+      hook: t.hookPlain,
       score: t.relevanceScore,
       section: 'templates' as const,
       isTemplate: true,
