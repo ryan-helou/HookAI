@@ -5,8 +5,14 @@ import {
   FRAMEWORK_SUMMARY,
 } from '../constants/hookFramework';
 
+const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+
+if (!apiKey) {
+  console.error('VITE_OPENAI_API_KEY is not configured in environment variables');
+}
+
 const openai = new OpenAI({
-  apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+  apiKey: apiKey,
   dangerouslyAllowBrowser: true,
 });
 
@@ -504,6 +510,10 @@ Return ONLY a JSON array with 3 objects containing the hook with bold substituti
     }));
   } catch (error) {
     console.error('Template selection error:', error);
+    if (error instanceof Error) {
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+    }
     throw error;
   }
 };
@@ -608,6 +618,10 @@ Return ONLY a JSON array with no markdown, no explanation:
     }));
   } catch (error) {
     console.error('Original hook generation error:', error);
+    if (error instanceof Error) {
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+    }
     throw error;
   }
 };
@@ -627,6 +641,10 @@ export const generateHooks = async (description: string, tone: Tone): Promise<Ho
     return allHooks.sort((a, b) => b.score - a.score);
   } catch (error) {
     console.error('Hook generation orchestration error:', error);
+    if (error instanceof Error) {
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+    }
     throw error;
   }
 };
