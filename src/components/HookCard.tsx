@@ -39,9 +39,21 @@ const HookCard = ({ hook }: HookCardProps) => {
           <div className={`text-3xl font-black ${scoreColor}`}>
             {hook.score}
           </div>
-          <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold ${badge.color} mt-1`}>
-            {badge.icon} {badge.label}
-          </span>
+          <div className="flex items-center gap-2 mt-1">
+            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold ${badge.color}`}>
+              {badge.icon} {badge.label}
+            </span>
+            {hook.isTemplate && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-700">
+                🎯 Template
+              </span>
+            )}
+            {!hook.isTemplate && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold bg-purple-100 text-purple-700">
+                ✨ Original
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
