@@ -13,7 +13,7 @@ const HooksDisplay = ({ hooks, isLoading, onRegenerate }: HooksDisplayProps) => 
   const originals = hooks.filter((h) => h.section === 'created');
 
   return (
-    <div className="bg-white rounded-2xl p-16 shadow-lg border border-gray-200">
+    <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
       {/* Header */}
       <div className="flex items-center justify-between mb-10">
         <div>
