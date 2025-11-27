@@ -99,12 +99,6 @@ function App() {
             </div>
           </div>
 
-          {/* Footer */}
-          <div className="text-center mt-20 pt-12 border-t border-gray-200">
-            <p className="text-gray-500 text-sm font-medium">
-              Powered by OpenAI GPT-4 • Built for content creators
-            </p>
-          </div>
         </div>
       </div>
     </div>
