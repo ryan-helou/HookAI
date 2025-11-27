@@ -4,6 +4,6 @@
   "installCommand": "npm install",
   "framework": "vite",
   "env": {
-    "VITE_OPENAI_API_KEY": "@openai_api_key"
+    "VITE_API_BASE_URL": "@api_base_url"
   }
 }
