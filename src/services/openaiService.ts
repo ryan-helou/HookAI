@@ -1,5 +1,9 @@
 import { OpenAI } from 'openai';
 import type { Hook, Tone } from '../types/hooks';
+import {
+  HOOK_TEMPLATES,
+  FRAMEWORK_SUMMARY,
+} from '../constants/hookFramework';
 
 const openai = new OpenAI({
   apiKey: import.meta.env.VITE_OPENAI_API_KEY,
@@ -504,7 +508,7 @@ Return ONLY a JSON array with 3 objects containing the hook with bold substituti
   }
 };
 
-// Generate 2 original hooks not in the template database
+// Generate 3 original hooks not in the template database
 const generateOriginalHooks = async (description: string, tone: Tone): Promise<Hook[]> => {
   try {
     const toneInstructions: Record<string, string> = {
@@ -516,26 +520,51 @@ const generateOriginalHooks = async (description: string, tone: Tone): Promise<H
       professional: 'Use formal, authoritative tone, industry expertise, data-driven insights, and credibility markers.',
     };
 
+    // Select relevant hook templates based on topic
+    const templateCategories = [
+      HOOK_TEMPLATES.educational,
+      HOOK_TEMPLATES.curiosity,
+      HOOK_TEMPLATES.authority,
+      HOOK_TEMPLATES.storytelling,
+    ];
+    const selectedTemplates = templateCategories
+      .flat()
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 12);
+
     const generationResponse = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
         {
           role: 'user',
-          content: `You are an expert at creating completely original, never-before-seen viral social media hooks. Generate 2 COMPLETELY ORIGINAL (not templates) ${tone} hooks for a video about: "${description}".
+          content: `${FRAMEWORK_SUMMARY}
+
+You are an expert at creating completely original, never-before-seen viral social media hooks. Generate 3 COMPLETELY ORIGINAL (not templates) ${tone} hooks for a video about: "${description}".
+
+KEY FRAMEWORK PRINCIPLES:
+- CLARITY & CONCISION: Make context clear instantly (aim for 1 second)
+- SPECIFICITY: Use specific details, numbers, and timeframes - not broad concepts
+- CURIOSITY GAPS: At least 50% should create open loops that force viewing (challenge assumptions)
+- RELATABILITY: Include at least 2 "Message to Former Self" hooks that speak to past struggles
+- ACTIONABLE: Focus on outcomes and solutions with "you" or "we"
+
+REFERENCE TEMPLATES (adapt, don't copy):
+${selectedTemplates.slice(0, 6).map((t) => `- "${t}"`).join('\n')}
 
 These hooks MUST be:
-- Short, punchy, and memorable
-- Stop-scrollers (people MUST click)
-- COMPLETELY ORIGINAL and unique (not based on common templates)
-- Specific to the topic
-- Creative and unexpected
+- Under 1.5 seconds of spoken word
+- Specific to the video topic: "${description}"
+- Create strong curiosity gaps or challenge assumptions
+- Include tangible numbers/timeframes where possible
+- Original and never-before-seen (not based on common templates)
+- Speak directly to the viewer using "you" or "we"
 
-Tone: ${toneInstructions[tone]}
+Tone Guidance: ${toneInstructions[tone]}
 
-Generate 2 unique, creative, original hooks that would make people stop scrolling:
+Generate 3 unique, creative, original hooks that make people stop scrolling and want to watch:
 
 Return ONLY a JSON array with no markdown, no explanation:
-[{"hook": "hook text here"}, {"hook": "hook text here"}]`,
+[{"hook": "hook text here"}, {"hook": "hook text here"}, {"hook": "hook text here"}]`,
         },
       ],
       temperature: 0.95,

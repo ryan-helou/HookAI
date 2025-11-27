@@ -13,24 +13,24 @@ const HooksDisplay = ({ hooks, isLoading, onRegenerate }: HooksDisplayProps) => 
   const originals = hooks.filter((h) => h.section === 'created');
 
   return (
-    <div className="bg-white/60 backdrop-blur-xl rounded-2xl p-8 border border-white/20 ring-1 ring-white/10">
+    <div className="bg-white/60 backdrop-blur-xl rounded-2xl p-5 sm:p-6 md:p-8 border border-white/20 ring-1 ring-white/10">
       {/* Header */}
-      <div className="flex items-center justify-between mb-10 pb-6 border-b border-gray-200/50">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 mb-6 sm:mb-8 md:mb-10 pb-4 sm:pb-6 border-b border-gray-200/50">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Your Hooks</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Your Hooks</h2>
           {hooks.length > 0 && (
-            <p className="text-gray-600 text-sm font-medium mt-2">{templates.length} proven templates + {originals.length} original creations</p>
+            <p className="text-gray-600 text-xs sm:text-sm font-medium mt-1 sm:mt-2">{templates.length} proven templates + {originals.length} original creations</p>
           )}
         </div>
         {hooks.length > 0 && (
           <button
             onClick={onRegenerate}
             disabled={isLoading}
-            className="flex items-center gap-2 px-6 py-3 bg-black hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl font-bold text-sm transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="flex items-center justify-center sm:justify-start gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-black hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl font-bold text-xs sm:text-sm transition-all duration-200 shadow-lg hover:shadow-xl whitespace-nowrap"
           >
             {isLoading ? (
               <>
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                <div className="w-3 sm:w-4 h-3 sm:h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                 <span className="hidden sm:inline">Regenerating...</span>
               </>
             ) : (
@@ -59,15 +59,15 @@ const HooksDisplay = ({ hooks, isLoading, onRegenerate }: HooksDisplayProps) => 
 
       {/* Hooks sections */}
       {hooks.length > 0 && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
           {/* Top 3 Templates Section */}
           {templates.length > 0 && (
             <div>
-              <div className="mb-6">
-                <h3 className="text-lg font-bold text-gray-900">Top 3 Proven Templates</h3>
+              <div className="mb-4 sm:mb-6">
+                <h3 className="text-base sm:text-lg font-bold text-gray-900">Top 3 Proven Templates</h3>
                 <p className="text-gray-600 text-xs font-medium mt-1">Battle-tested hooks that work</p>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {templates.map((hook, index) => (
                   <div
                     key={`template-${index}`}
@@ -84,11 +84,11 @@ const HooksDisplay = ({ hooks, isLoading, onRegenerate }: HooksDisplayProps) => 
           {/* AI's Original Creations Section */}
           {originals.length > 0 && (
             <div>
-              <div className="mb-6">
-                <h3 className="text-lg font-bold text-gray-900">AI's Original Creations</h3>
+              <div className="mb-4 sm:mb-6">
+                <h3 className="text-base sm:text-lg font-bold text-gray-900">AI's Original Creations</h3>
                 <p className="text-gray-600 text-xs font-medium mt-1">Unique, never-before-seen hooks</p>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {originals.map((hook, index) => (
                   <div
                     key={`original-${index}`}
