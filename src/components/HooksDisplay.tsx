@@ -59,7 +59,7 @@ const HooksDisplay = ({ hooks, isLoading, onRegenerate }: HooksDisplayProps) => 
 
       {/* Hooks sections */}
       {hooks.length > 0 && (
-        <div className="space-y-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {/* Top 3 Templates Section */}
           {templates.length > 0 && (
             <div>
