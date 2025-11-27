@@ -32,17 +32,14 @@ const HookForm = ({ onGenerate, isLoading }: HookFormProps) => {
 
       {/* Description field */}
       <div className="mb-8">
-        <div className="flex items-center justify-between mb-3">
+        <div className="mb-3">
           <label className="block text-gray-900 text-sm font-semibold">
             What's your video about?
           </label>
-          <span className={`text-xs font-medium ${description.length > 450 ? 'text-orange-600' : 'text-gray-500'}`}>
-            {description.length}/500
-          </span>
         </div>
         <textarea
           value={description}
-          onChange={(e) => setDescription(e.target.value.slice(0, 500))}
+          onChange={(e) => setDescription(e.target.value)}
           placeholder="E.g., A tutorial on making sourdough bread, a fitness transformation story, or a productivity hack..."
           className="w-full px-4 py-4 bg-white border-2 border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition-all resize-none text-base font-medium"
           rows={5}
