@@ -99,6 +99,12 @@ function App() {
             </div>
           </div>
 
+          {/* Footer */}
+          <div className="text-center mt-20">
+            <p className="text-gray-400 text-xs font-medium">
+              Developed by Ryan Helou
+            </p>
+          </div>
         </div>
       </div>
     </div>
