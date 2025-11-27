@@ -40,25 +40,25 @@ const HookCard = ({ hook }: HookCardProps) => {
   const badge = getScoreBadge(hook.score);
 
   return (
-    <div className="bg-white/50 backdrop-blur-md rounded-xl p-4 border border-white/20 ring-1 ring-white/10 hover:bg-white/80 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+    <div className="bg-white/50 backdrop-blur-md rounded-xl p-3 sm:p-4 border border-white/20 ring-1 ring-white/10 hover:bg-white/80 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
       {/* Score and badge header */}
-      <div className="flex items-start justify-between gap-3 mb-3">
+      <div className="flex items-start justify-between gap-2 sm:gap-3 mb-2 sm:mb-3">
         <div className="flex-1 min-w-0">
-          <div className="text-3xl font-black text-gray-900">
+          <div className="text-2xl sm:text-3xl font-black text-gray-900">
             {hook.score}
           </div>
-          <div className="flex items-center gap-2 mt-1">
-            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold ${badge.color}`}>
-              {badge.icon} {badge.label}
+          <div className="flex flex-wrap items-center gap-1 sm:gap-2 mt-1">
+            <span className={`inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-full text-xs font-bold ${badge.color}`}>
+              {badge.icon} <span className="hidden sm:inline">{badge.label}</span>
             </span>
             {hook.isTemplate && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-700">
-                Template
+              <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-700">
+                <span className="hidden sm:inline">Template</span><span className="sm:hidden">📌</span>
               </span>
             )}
             {!hook.isTemplate && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold bg-purple-100 text-purple-700">
-                ✨ Original
+              <span className="inline-flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-full text-xs font-bold bg-purple-100 text-purple-700">
+                <span className="hidden sm:inline">✨ Original</span><span className="sm:hidden">✨</span>
               </span>
             )}
           </div>
@@ -66,14 +66,14 @@ const HookCard = ({ hook }: HookCardProps) => {
       </div>
 
       {/* Hook text */}
-      <p className="text-gray-900 leading-snug text-sm font-semibold mb-3">
+      <p className="text-gray-900 leading-snug text-xs sm:text-sm font-semibold mb-2 sm:mb-3">
         "{renderHookText()}"
       </p>
 
       {/* Copy button */}
       <button
         onClick={handleCopy}
-        className={`w-full px-3 py-2 bg-black/90 backdrop-blur-md hover:bg-gray-800 text-white text-xs font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg ${
+        className={`w-full px-2 sm:px-3 py-1.5 sm:py-2 bg-black/90 backdrop-blur-md hover:bg-gray-800 text-white text-xs font-bold rounded-lg transition-all duration-200 shadow-md hover:shadow-lg ${
           copied ? 'ring-2 ring-emerald-400' : ''
         }`}
       >

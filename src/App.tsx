@@ -44,17 +44,17 @@ function App() {
           warpStrength={1}
           mouseInfluence={1}
           parallax={0.5}
-          noise={0.1}
+          noise={0.05}
           transparent
         />
       </div>
 
       {/* Content overlay */}
       <div className="relative z-10">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-5 md:px-6 py-8 sm:py-12 md:py-20">
           {/* Header Section */}
-          <div className="text-center mb-20 animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
+          <div className="text-center mb-12 sm:mb-16 md:mb-20 animate-fade-in">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-black mb-4 sm:mb-6 leading-tight">
               <DecryptedText
                 text="Create Viral Hooks in Seconds"
                 speed={60}
@@ -81,13 +81,13 @@ function App() {
               />
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
+            <p className="text-sm sm:text-base md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium px-2">
               Generate engaging hooks for your videos using advanced AI. Just describe your video and pick a tone.
             </p>
           </div>
 
           {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 items-start">
             {/* Form Section - Left */}
             <div className="lg:col-span-1 animate-slide-left">
               <HookForm onGenerate={handleGenerateHooks} isLoading={isLoading} />
@@ -100,7 +100,7 @@ function App() {
           </div>
 
           {/* Footer */}
-          <div className="text-center mt-20">
+          <div className="text-center mt-12 sm:mt-16 md:mt-20">
             <p className="text-gray-400 text-xs font-medium">
               Developed by Ryan Helou
             </p>
