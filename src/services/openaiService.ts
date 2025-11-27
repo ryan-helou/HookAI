@@ -490,9 +490,10 @@ Return ONLY a JSON array with 3 objects containing the hook with bold substituti
     const selectedTemplates = JSON.parse(selectionMatch[0]) as Array<{ hook: string; hookPlain: string; relevanceScore: number }>;
 
     // Convert to Hook format with template metadata
-    // Use hookPlain (clean version) for display, store full hook with markdown for reference
+    // Store both markdown (for display) and plain text (for copying)
     return selectedTemplates.map((t) => ({
-      hook: t.hookPlain,
+      hook: t.hook, // Markdown version with bold and brackets
+      hookPlain: t.hookPlain, // Plain text version for copying
       score: t.relevanceScore,
       section: 'templates' as const,
       isTemplate: true,

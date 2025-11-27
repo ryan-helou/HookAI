@@ -11,12 +11,24 @@ const HookCard = ({ hook }: HookCardProps) => {
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(hook.hook);
+      // Copy plain text version (without markdown) for templates, or regular hook text
+      const textToCopy = hook.hookPlain || hook.hook;
+      await navigator.clipboard.writeText(textToCopy);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
       console.error('Failed to copy:', error);
     }
+  };
+
+  // Parse markdown to display bold text
+  const renderHookText = () => {
+    const text = hook.hook;
+    // Replace **text** with <strong> tags and keep other text as-is
+    const parts = text.split(/\*\*([^*]+)\*\*/g);
+    return parts.map((part, i) =>
+      i % 2 === 1 ? <strong key={i} className="font-bold">{part}</strong> : part
+    );
   };
 
   const getScoreBadge = (score: number) => {
@@ -59,7 +71,7 @@ const HookCard = ({ hook }: HookCardProps) => {
 
       {/* Hook text */}
       <p className="text-gray-900 leading-snug text-sm font-semibold mb-3 line-clamp-2">
-        "{hook.hook}"
+        "{renderHookText()}"
       </p>
 
       {/* Copy button */}
