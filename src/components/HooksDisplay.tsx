@@ -60,11 +60,11 @@ const HooksDisplay = ({ hooks, isLoading, onRegenerate }: HooksDisplayProps) => 
       {/* Hooks sections */}
       {hooks.length > 0 && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-10">
-          {/* Top 3 Templates Section */}
+          {/* Proven Templates Section */}
           {templates.length > 0 && (
             <div>
               <div className="mb-4 sm:mb-6">
-                <h3 className="text-base sm:text-lg font-bold text-gray-900">Top 3 Proven Templates</h3>
+                <h3 className="text-base sm:text-lg font-bold text-gray-900">Proven Templates</h3>
                 <p className="text-gray-600 text-xs font-medium mt-1">Battle-tested hooks that work</p>
               </div>
               <div className="space-y-3 sm:space-y-4">
