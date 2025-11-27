@@ -9,8 +9,8 @@ interface HooksDisplayProps {
 
 const HooksDisplay = ({ hooks, isLoading, onRegenerate }: HooksDisplayProps) => {
   // Separate hooks by section
-  const templates = hooks.filter((h) => h.section === 'templates');
-  const originals = hooks.filter((h) => h.section === 'created');
+  const templates = hooks.filter((h) => h.isTemplate === true);
+  const originals = hooks.filter((h) => h.isTemplate === false);
 
   return (
     <div className="bg-white/60 backdrop-blur-xl rounded-2xl p-5 sm:p-6 md:p-8 border border-white/20 ring-1 ring-white/10">
