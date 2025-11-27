@@ -8,14 +8,18 @@ interface HooksDisplayProps {
 }
 
 const HooksDisplay = ({ hooks, isLoading, onRegenerate }: HooksDisplayProps) => {
+  // Separate hooks by section
+  const templates = hooks.filter((h) => h.section === 'templates');
+  const originals = hooks.filter((h) => h.section === 'created');
+
   return (
     <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
       {/* Header */}
       <div className="flex items-center justify-between mb-10">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Generated Hooks</h2>
+          <h2 className="text-2xl font-bold text-gray-900">Your Hooks</h2>
           {hooks.length > 0 && (
-            <p className="text-gray-600 text-sm font-medium mt-2">{hooks.length} amazing hooks ready</p>
+            <p className="text-gray-600 text-sm font-medium mt-2">{templates.length} proven templates + {originals.length} original creations</p>
           )}
         </div>
         {hooks.length > 0 && (
@@ -48,23 +52,61 @@ const HooksDisplay = ({ hooks, isLoading, onRegenerate }: HooksDisplayProps) => 
               <div className="absolute inset-2 bg-white rounded-full"></div>
             </div>
             <p className="text-gray-900 text-lg font-bold text-center">Creating your hooks...</p>
-            <p className="text-gray-600 text-sm text-center">This usually takes a few seconds</p>
+            <p className="text-gray-600 text-sm text-center">Finding proven templates & generating originals...</p>
           </div>
         </div>
       )}
 
-      {/* Hooks list */}
+      {/* Hooks sections */}
       {hooks.length > 0 && (
-        <div className="space-y-4">
-          {hooks.map((hook, index) => (
-            <div
-              key={index}
-              className="animate-fade-in"
-              style={{ animationDelay: `${index * 75}ms` }}
-            >
-              <HookCard hook={hook} />
+        <div className="space-y-12">
+          {/* Top 3 Templates Section */}
+          {templates.length > 0 && (
+            <div>
+              <div className="mb-6">
+                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                  <span>🎯</span>
+                  Top 3 Proven Templates
+                </h3>
+                <p className="text-gray-600 text-xs font-medium mt-1">Battle-tested hooks that work</p>
+              </div>
+              <div className="space-y-4">
+                {templates.map((hook, index) => (
+                  <div
+                    key={`template-${index}`}
+                    className="animate-fade-in"
+                    style={{ animationDelay: `${index * 75}ms` }}
+                  >
+                    <HookCard hook={hook} />
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
+          )}
+
+          {/* AI's Original Creations Section */}
+          {originals.length > 0 && (
+            <div>
+              <div className="mb-6">
+                <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                  <span>✨</span>
+                  AI's Original Creations
+                </h3>
+                <p className="text-gray-600 text-xs font-medium mt-1">Unique, never-before-seen hooks</p>
+              </div>
+              <div className="space-y-4">
+                {originals.map((hook, index) => (
+                  <div
+                    key={`original-${index}`}
+                    className="animate-fade-in"
+                    style={{ animationDelay: `${(templates.length + index) * 75}ms` }}
+                  >
+                    <HookCard hook={hook} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
 
