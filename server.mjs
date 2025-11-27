@@ -74,10 +74,10 @@ app.post('/api/generate-hooks', async (req, res) => {
 Here are proven viral hook templates:
 ${templateSample.map((h, i) => `${i + 1}. "${h}"`).join('\n')}
 
-Select the BEST 3 templates and fill in the [brackets] with specific details based on "${description}".
+Select the BEST 4 templates and fill in the [brackets] with specific details based on "${description}".
 Show your work by making filled text BOLD.
 
-Return ONLY a JSON array with 3 objects:
+Return ONLY a JSON array with 4 objects:
 [{"hook": "filled hook with **bold** text", "hookPlain": "plain text version", "relevanceScore": 85}]`,
         },
       ],
@@ -95,7 +95,9 @@ Return ONLY a JSON array with 3 objects:
       throw new Error('Could not parse template response');
     }
 
-    const templates = JSON.parse(templateMatch[0]);
+    const allTemplates = JSON.parse(templateMatch[0]);
+    // Ensure we have at least 3 templates
+    const templates = allTemplates.slice(0, 3);
 
     // Generate 2 original hooks
     const toneInstructions = {
