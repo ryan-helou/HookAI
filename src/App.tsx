@@ -33,7 +33,7 @@ function App() {
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Animated background */}
-      <div className="fixed inset-0 z-0 w-screen h-screen bg-gray-900">
+      <div className="fixed inset-0 z-0 w-screen h-screen bg-black">
         <ColorBends
           colors={['#FFFFFF', '#D8D8DF', '#A1A1AA']}
           rotation={0}
