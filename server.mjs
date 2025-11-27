@@ -74,10 +74,10 @@ app.post('/api/generate-hooks', async (req, res) => {
 Here are proven viral hook templates:
 ${templateSample.map((h, i) => `${i + 1}. "${h}"`).join('\n')}
 
-Select the BEST 2 templates and fill in the [brackets] with specific details based on "${description}".
+Select the BEST 3 templates and fill in the [brackets] with specific details based on "${description}".
 Show your work by making filled text BOLD.
 
-Return ONLY a JSON array with 2 objects:
+Return ONLY a JSON array with 3 objects:
 [{"hook": "filled hook with **bold** text", "hookPlain": "plain text version", "relevanceScore": 85}]`,
         },
       ],
@@ -97,7 +97,7 @@ Return ONLY a JSON array with 2 objects:
 
     const templates = JSON.parse(templateMatch[0]);
 
-    // Generate 3 original hooks
+    // Generate 2 original hooks
     const toneInstructions = {
       funny: 'Use humor, witty jokes, and laugh-out-loud moments.',
       dramatic: 'Use suspense, cliffhangers, and intense language.',
@@ -112,7 +112,7 @@ Return ONLY a JSON array with 2 objects:
       messages: [
         {
           role: 'user',
-          content: `Generate 3 COMPLETELY ORIGINAL viral hooks for a video about: "${description}".
+          content: `Generate 2 COMPLETELY ORIGINAL viral hooks for a video about: "${description}".
 Tone: ${tone}. ${toneInstructions[tone] || 'Be engaging and compelling.'}
 
 Requirements:
