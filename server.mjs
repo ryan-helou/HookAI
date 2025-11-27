@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
-const port = process.env.PORT || 3004;
+const port = process.env.PORT || 3001;
 
 // Debug logging
 const apiKey = process.env.OPENAI_API_KEY;
