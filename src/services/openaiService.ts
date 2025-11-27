@@ -450,7 +450,7 @@ const PROVEN_TEMPLATES = [
   "This is how I would (insert action) if I were starting from scratch).",
 ];
 
-// Select best matching templates from proven hooks
+// Select best matching templates from proven hooks and fill in placeholders
 const selectBestTemplates = async (description: string): Promise<Hook[]> => {
   try {
     // Create a sample of templates to send to AI (100 random for context)
@@ -463,14 +463,18 @@ const selectBestTemplates = async (description: string): Promise<Hook[]> => {
           role: 'user',
           content: `You are an expert at analyzing viral social media hooks. A creator is making a video about: "${description}".
 
-Here are 100 proven viral hook templates that have been tested and verified to work:
+Here are 100 proven viral hook templates that have been tested and verified to work. These templates have [brackets] that need to be filled in with specific content:
 
 ${templateSample.map((h, i) => `${i + 1}. "${h}"`).join('\n')}
 
-Your job: Select the BEST 3 hook templates from this list that would work PERFECTLY for this video topic. These should be the templates that are most relevant, engaging, and likely to resonate with the target audience for this topic.
+Your job:
+1. Select the BEST 3 hook templates from this list that would work PERFECTLY for this video topic
+2. FILL IN ALL THE BRACKETS with specific, relevant details based on "${description}"
 
-Return ONLY a JSON array with 3 objects containing the "hook" text and a "relevanceScore" (1-100 indicating how well it matches this topic):
-[{"hook": "exact hook text from list", "relevanceScore": 85}, ...]`,
+Example: If the video is about "learning to build a paper airplane", and you select the template "Alright I'm gonna teach you exactly how to [outcome] in one video." - you would fill it in as: "Alright I'm gonna teach you exactly how to build a paper airplane in one video."
+
+Return ONLY a JSON array with 3 objects containing the FILLED-IN "hook" text and a "relevanceScore" (1-100):
+[{"hook": "Alright I'm gonna teach you exactly how to build a paper airplane in one video", "relevanceScore": 85}, ...]`,
         },
       ],
       temperature: 0.7,
