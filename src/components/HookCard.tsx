@@ -70,7 +70,7 @@ const HookCard = ({ hook }: HookCardProps) => {
       </div>
 
       {/* Hook text */}
-      <p className="text-gray-900 leading-snug text-sm font-semibold mb-3 line-clamp-2">
+      <p className="text-gray-900 leading-snug text-sm font-semibold mb-3 line-clamp-3">
         "{renderHookText()}"
       </p>
 
