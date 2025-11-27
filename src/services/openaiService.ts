@@ -1,10 +1,8 @@
 import type { Hook, Tone } from '../types/hooks';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3004';
-
 export const generateHooks = async (description: string, tone: Tone): Promise<Hook[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/generate-hooks`, {
+    const response = await fetch('/api/generate-hooks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
