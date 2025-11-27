@@ -34,7 +34,10 @@ const HooksDisplay = ({ hooks, isLoading, onRegenerate }: HooksDisplayProps) => 
                 <span className="hidden sm:inline">Regenerating...</span>
               </>
             ) : (
-              <span className="hidden sm:inline">Regenerate</span>
+              <>
+                <span>🔄</span>
+                <span className="hidden sm:inline">Regenerate</span>
+              </>
             )}
           </button>
         )}
@@ -105,6 +108,9 @@ const HooksDisplay = ({ hooks, isLoading, onRegenerate }: HooksDisplayProps) => 
       {!isLoading && hooks.length === 0 && (
         <div className="flex items-center justify-center py-20">
           <div className="text-center">
+            <div className="text-6xl mb-4 animate-bounce" style={{ animationDuration: '2s' }}>
+              ✨
+            </div>
             <p className="text-gray-900 text-lg font-bold mb-2">No hooks yet</p>
             <p className="text-gray-600 text-sm font-medium">
               Fill out the form to generate your first set of hooks
