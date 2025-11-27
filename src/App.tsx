@@ -25,7 +25,7 @@ function App() {
       if (error instanceof Error) {
         const errorMessage = error.message.toLowerCase();
         if (errorMessage.includes('api_key') || errorMessage.includes('unauthorized') || errorMessage.includes('401')) {
-          alert('OpenAI API Error: Your API key is invalid or expired.\n\n1. Go to https://platform.openai.com/account/api-keys\n2. Create a new API key\n3. Update the VITE_OPENAI_API_KEY in your .env.local file\n4. Restart your dev server');
+          alert('OpenAI API Error: Backend API key is invalid or expired. Please contact your administrator.');
         } else {
           alert('Failed to generate hooks. Please check your internet connection and try again. Check browser console for details.');
         }
