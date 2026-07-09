@@ -1,6 +1,8 @@
-# HookAI
+# 🪝 HookAI
 
 *A web app that writes the opening line of your short-form video — the "hook" — from a one-sentence description of what the video is about.*
+
+![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white) ![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=flat-square&logo=openai&logoColor=white) ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
 
 The first two seconds decide whether a Reel or TikTok gets watched or scrolled past. HookAI takes a plain description ("a tutorial on making sourdough bread") and returns five candidate hooks, each scored 1–100 for engagement potential, so you can copy the strongest one and start filming.
 
