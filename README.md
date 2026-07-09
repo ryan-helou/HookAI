@@ -1,73 +1,17 @@
-# React + TypeScript + Vite
+# HookAI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+*A web app that writes the opening line of your short-form video — the "hook" — from a one-sentence description of what the video is about.*
 
-Currently, two official plugins are available:
+The first two seconds decide whether a Reel or TikTok gets watched or scrolled past. HookAI takes a plain description ("a tutorial on making sourdough bread") and returns five candidate hooks, each scored 1–100 for engagement potential, so you can copy the strongest one and start filming.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Behind the form is a single serverless function, `api/generate-hooks.mjs`, that makes three calls to OpenAI's `gpt-4o-mini`:
 
-## React Compiler
+1. It shuffles a list of nine proven templates — "Here's the exact 3 step process to [outcome]", "Wanna know why most people never [outcome]?" — samples five, and asks the model (temperature 0.7) to pick the best and fill the brackets with details from your topic, bolding the filled-in words. It keeps the top three.
+2. It generates two fully original hooks (temperature 0.95) tuned to one of six tones — funny, dramatic, inspirational, urgent, casual, professional — under constraints like "under 1.5 seconds of spoken word" and "create a curiosity gap."
+3. A third call scores those two originals 1–100.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The five results come back sorted by score and split in the UI into proven templates and original creations, each card badged Viral (80+), Hot (60+), Good (40+), or Decent, with copy-to-clipboard and a regenerate button.
 
-## Expanding the ESLint configuration
+The frontend is React 19 and TypeScript on Vite, styled with Tailwind, over a WebGL animated background (three.js) and a decrypt-style animated headline. It deploys to Vercel; `server.mjs` is an equivalent Express version of the endpoint for local development.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+What ships is exactly this: the one page, and the one endpoint behind it. No accounts, no billing, no saved history — you describe the video, you copy the hook you like, you go film.
