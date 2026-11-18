@@ -1,6 +1,12 @@
+<div align="center">
+
 # HookAI
 
-A one-page website that writes opening lines ("hooks") for short videos like Reels and TikToks.
+**A one-page website that writes opening lines ("hooks") for short videos like Reels and TikToks.**
+
+</div>
+
+<br>
 
 The first couple of seconds decide whether someone keeps watching a short video or scrolls past. With HookAI you describe your video in a sentence, for example "a tutorial on making sourdough bread," and it uses AI (a computer program that writes text) to suggest five opening lines. Some are based on proven fill-in-the-blank formats, and some are written from scratch. It is a small, simple tool: no accounts, nothing saved.
 
