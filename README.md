@@ -4,13 +4,13 @@
 
 **A one-page website that writes opening lines ("hooks") for short videos like Reels and TikToks.**
 
-<!-- facts --><img alt="Each try: 3 proven + 2 new" src="https://img.shields.io/badge/Each_try-3_proven_%2B_2_new-24292f?style=for-the-badge"> <img alt="Sign-up: not needed" src="https://img.shields.io/badge/Sign--up-not_needed-24292f?style=for-the-badge">
+<!-- facts --><img alt="Per click: 5 hooks" src="https://img.shields.io/badge/Per_click-5_hooks-24292f?style=for-the-badge"> <img alt="Mix: proven + original" src="https://img.shields.io/badge/Mix-proven_%2B_original-24292f?style=for-the-badge"> <img alt="Sign-up: not needed" src="https://img.shields.io/badge/Sign--up-not_needed-24292f?style=for-the-badge">
 
 </div>
 
 <br>
 
-The first couple of seconds decide whether someone keeps watching a short video or scrolls past. With HookAI you describe your video in a sentence, for example "a tutorial on making sourdough bread," and it uses AI (a computer program that writes text) to suggest five opening lines. Some are based on proven fill-in-the-blank formats, and some are written from scratch. It is a small, simple tool: no accounts, nothing saved.
+The first couple of seconds decide whether someone keeps watching a short video or scrolls past. With HookAI you describe your video in a sentence, for example "a tutorial on making sourdough bread," and it uses AI (a computer program that writes text) to suggest five opening lines. Some are based on proven fill-in-the-blank formats, and some are written from scratch. No account needed, and nothing is saved.
 
 ## What you can do with it
 
