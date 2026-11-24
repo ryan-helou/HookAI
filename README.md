@@ -4,6 +4,8 @@
 
 **A one-page website that writes opening lines ("hooks") for short videos like Reels and TikToks.**
 
+<!-- facts --><img alt="Each try: 3 proven + 2 new" src="https://img.shields.io/badge/Each_try-3_proven_%2B_2_new-24292f?style=for-the-badge"> <img alt="Sign-up: not needed" src="https://img.shields.io/badge/Sign--up-not_needed-24292f?style=for-the-badge">
+
 </div>
 
 <br>
